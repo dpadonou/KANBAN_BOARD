@@ -15,7 +15,6 @@ public class JpaTest {
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
 
-
 		try {
 
 		} catch (Exception e) {
@@ -23,11 +22,8 @@ public class JpaTest {
 		}
 		tx.commit();
 
-
 		manager.close();
 		EntityManagerHelper.closeEntityManagerFactory();
 		//		factory.close();
 	}
-
-
 }
