@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @DiscriminatorValue("git_card")
-public class GitCard extends Card{
+public class GitCard extends Card implements Serializable {
 
     public GitCard(String libelle, LocalDateTime createdDate, LocalDateTime deadLine, String lieu, String url, String note, String urlIssue, String gitHash) {
         super(libelle, createdDate, deadLine, lieu, url, note);

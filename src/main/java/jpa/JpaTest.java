@@ -102,7 +102,7 @@ public class JpaTest {
         manager.merge(c6);
     }
 
-    private static User createUser(String firstName, String lastName, EntityManager manager) {
+    public static User createUser(String firstName, String lastName, EntityManager manager) {
         User user = new User(lastName, firstName);
         manager.persist(user);
         return user;
