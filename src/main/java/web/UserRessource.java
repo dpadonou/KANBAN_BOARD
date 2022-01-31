@@ -1,5 +1,7 @@
 package web;
 
+import dto.AddUserDto;
+import dto.BatchUserDto;
 import dto.UserDTO;
 import dto.mapper.UserMapper;
 import entities.User;
@@ -33,17 +35,26 @@ public class UserRessource {
 
     @POST
     @Consumes("application/json")
-    public Response save(UserDTO userDTO) {
+    public Response save(AddUserDto userDTO) {
         service.save(mapper.toUser(userDTO));
         //TODO Use created and retreive the created ressource url
         return Response.ok().entity("Le nouvel utilisateur a été ajouté avec succès.").build();
+    }
+
+    @POST
+    @Path("/all")
+    @Consumes("application/json")
+    public Response save(BatchUserDto userList) {
+        userList.getUserList().forEach(addUserDto -> service.save(mapper.toUser(addUserDto)));
+        //TODO Use created and retreive the created ressource url
+        return Response.ok().entity(userList.getUserList().size() + " nouveaux utilisateurs ont été ajoutés avec succès.").build();
     }
 
     @PUT
     @Path("/{userId}")
     @Consumes("application/json")
     //TODO: Récupérer un id dans le path et les nouvelles valeurs dans le body
-    public UserDTO update(@PathParam("userId") Long id, UserDTO userDTO){
+    public UserDTO update(@PathParam("userId") Long id, AddUserDto userDTO){
         User old = service.findOne(id);
         if (old != null){
             User newUser = mapper.toUser(userDTO);

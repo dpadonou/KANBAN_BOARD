@@ -1,5 +1,6 @@
 package dto.mapper;
 
+import dto.AddUserDto;
 import dto.UserDTO;
 import entities.Card;
 import entities.User;
@@ -26,7 +27,7 @@ public class UserMapper {
         return new UserDTO(firstName, lastName, tachesAssigner, tachesCreer);
     }
 
-    public User toUser(UserDTO userDTO) {
+    public User toUser(AddUserDto userDTO) {
         return new User(userDTO.getFirstName(), userDTO.getLastName());
     }
 }
