@@ -1,43 +1,43 @@
 package dao;
 
 import dao.generic.AbstractJpaDao;
-import entities.Board;
+import entities.Section;
 
 import java.util.List;
 
-public class SectionDao extends AbstractJpaDao<Long, Board> {
+public class SectionDao extends AbstractJpaDao<Long, Section> {
 
     public SectionDao() {
         super();
     }
 
     @Override
-    public void setClazz(Class<Board> clazzToSet) {
-        super.setClazz(clazzToSet);
+    public void setClass(Class<Section> sectionClass) {
+        super.setClass(sectionClass);
     }
 
     @Override
-    public Board findOne(Long id) {
+    public Section findOne(Long id) {
         return super.findOne(id);
     }
 
     @Override
-    public List<Board> findAll() {
+    public List<Section> findAll() {
         return super.findAll();
     }
 
     @Override
-    public void save(Board entity) {
+    public void save(Section entity) {
         super.save(entity);
     }
 
     @Override
-    public Board update(Board entity) {
+    public Section update(Section entity) {
         return super.update(entity);
     }
 
     @Override
-    public void delete(Board entity) {
+    public void delete(Section entity) {
         super.delete(entity);
     }
 

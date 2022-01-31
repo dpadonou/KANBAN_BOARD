@@ -12,8 +12,8 @@ public class BoardDao extends AbstractJpaDao<Long, Board> {
     }
 
     @Override
-    public void setClazz(Class<Board> clazzToSet) {
-        super.setClazz(clazzToSet);
+    public void setClass(Class<Board> _classToSet) {
+        super.setClass(_classToSet);
     }
 
     @Override

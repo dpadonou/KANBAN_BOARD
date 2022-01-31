@@ -26,7 +26,6 @@ public class User implements Serializable {
     @Column(name = "first_name", length = 100)
     private String firstName;
 
-
     @ManyToMany(mappedBy = "inCharge")
     private List<Card> taches;
 
@@ -48,5 +47,9 @@ public class User implements Serializable {
     public void addTache(Card card) {
         taches.add(card);
         card.getInCharge().add(this);
+    }
+
+    public String concatName(){
+        return firstName + " " + lastName;
     }
 }

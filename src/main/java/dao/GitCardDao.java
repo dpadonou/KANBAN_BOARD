@@ -1,43 +1,43 @@
 package dao;
 
 import dao.generic.AbstractJpaDao;
-import entities.Board;
+import entities.GitCard;
 
 import java.util.List;
 
-public class GitCardDao extends AbstractJpaDao<Long, Board> {
+public class GitCardDao extends AbstractJpaDao<Long, GitCard> {
 
     public GitCardDao() {
         super();
     }
 
     @Override
-    public void setClazz(Class<Board> clazzToSet) {
-        super.setClazz(clazzToSet);
+    public void setClass(Class<GitCard> gitCardClass) {
+        super.setClass(gitCardClass);
     }
 
     @Override
-    public Board findOne(Long id) {
+    public GitCard findOne(Long id) {
         return super.findOne(id);
     }
 
     @Override
-    public List<Board> findAll() {
+    public List<GitCard> findAll() {
         return super.findAll();
     }
 
     @Override
-    public void save(Board entity) {
+    public void save(GitCard entity) {
         super.save(entity);
     }
 
     @Override
-    public Board update(Board entity) {
+    public GitCard update(GitCard entity) {
         return super.update(entity);
     }
 
     @Override
-    public void delete(Board entity) {
+    public void delete(GitCard entity) {
         super.delete(entity);
     }
 

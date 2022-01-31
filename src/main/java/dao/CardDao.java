@@ -1,43 +1,43 @@
 package dao;
 
 import dao.generic.AbstractJpaDao;
-import entities.Board;
+import entities.Card;
 
 import java.util.List;
 
-public class CardDao extends AbstractJpaDao<Long, Board> {
+public class CardDao extends AbstractJpaDao<Long, Card> {
 
     public CardDao() {
         super();
     }
 
     @Override
-    public void setClazz(Class<Board> clazzToSet) {
-        super.setClazz(clazzToSet);
+    public void setClass(Class<Card> cardClass) {
+        super.setClass(cardClass);
     }
 
     @Override
-    public Board findOne(Long id) {
+    public Card findOne(Long id) {
         return super.findOne(id);
     }
 
     @Override
-    public List<Board> findAll() {
+    public List<Card> findAll() {
         return super.findAll();
     }
 
     @Override
-    public void save(Board entity) {
+    public void save(Card entity) {
         super.save(entity);
     }
 
     @Override
-    public Board update(Board entity) {
+    public Card update(Card entity) {
         return super.update(entity);
     }
 
     @Override
-    public void delete(Board entity) {
+    public void delete(Card entity) {
         super.delete(entity);
     }
 

@@ -1,4 +1,4 @@
-package jpa;
+package db;
 
 import entities.*;
 import utils.TableList;

@@ -1,6 +1,6 @@
 package dao.generic;
 
-import jpa.EntityManagerHelper;
+import db.EntityManagerHelper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -10,22 +10,22 @@ import java.util.List;
 public abstract class AbstractJpaDao<K, T extends Serializable> implements IGenericDao<K, T> {
 
     protected EntityManager entityManager;
-    private Class<T> clazz;
+    private Class<T> _class;
 
     public AbstractJpaDao() {
         this.entityManager = EntityManagerHelper.getEntityManager();
     }
 
-    public void setClazz(Class<T> clazzToSet) {
-        this.clazz = clazzToSet;
+    public void setClass(Class<T> _classToSet) {
+        this._class = _classToSet;
     }
 
     public T findOne(K id) {
-        return entityManager.find(clazz, id);
+        return entityManager.find(_class, id);
     }
 
     public List<T> findAll() {
-        return entityManager.createQuery("select e from " + clazz.getName() + " as e", clazz).getResultList();
+        return entityManager.createQuery("select e from " + _class.getName() + " as e", _class).getResultList();
     }
 
     public void save(T entity) {
