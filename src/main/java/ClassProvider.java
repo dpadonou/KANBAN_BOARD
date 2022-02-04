@@ -1,9 +1,9 @@
-import entities.Section;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
-import jakarta.ws.rs.ApplicationPath;
-import jakarta.ws.rs.core.Application;
 import web.*;
+import web.doc.SwaggerResource;
 
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +22,7 @@ public class ClassProvider extends Application {
         classSet.add(UserRessource.class);
 
         classSet.add(OpenApiResource.class);
+        classSet.add(SwaggerResource.class);
 
         return classSet;
     }

@@ -1,6 +1,7 @@
 package dto.mapper;
 
-import dto.BoardDto;
+import dto.add.AddBoardDto;
+import dto.list.BoardDto;
 import entities.Board;
 import entities.Section;
 
@@ -21,7 +22,7 @@ public class BoardMapper {
         return new BoardDto(title, sessions);
     }
 
-    public Board toBoard(BoardDto boardDto) {
+    public Board toBoard(AddBoardDto boardDto) {
         return new Board(boardDto.getTitle());
     }
 }

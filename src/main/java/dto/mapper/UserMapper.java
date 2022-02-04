@@ -1,7 +1,7 @@
 package dto.mapper;
 
-import dto.AddUserDto;
-import dto.UserDTO;
+import dto.add.AddUserDto;
+import dto.list.UserDto;
 import entities.Card;
 import entities.User;
 
@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 
 public class UserMapper {
 
-    public UserDTO toDto(User user) {
+    public UserDto toDto(User user) {
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
         List<String> tachesAssigner = user
@@ -24,7 +24,7 @@ public class UserMapper {
                 .stream()
                 .map(Card::getLibelle)
                 .collect(toList());
-        return new UserDTO(firstName, lastName, tachesAssigner, tachesCreer);
+        return new UserDto(firstName, lastName, tachesAssigner, tachesCreer);
     }
 
     public User toUser(AddUserDto userDTO) {

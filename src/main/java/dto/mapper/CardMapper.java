@@ -1,6 +1,7 @@
 package dto.mapper;
 
-import dto.CardDto;
+import dto.add.AddCardDto;
+import dto.list.CardDto;
 import entities.Card;
 import entities.User;
 
@@ -31,7 +32,7 @@ public class CardMapper {
         return new CardDto(libelle, createdDate, deadLine, allocatedTime, lieu, url, note, personnesEnCharge, creator, section);
     }
 
-    public Card toCard(CardDto cardDto) {
+    public Card toCard(AddCardDto cardDto) {
         return new Card(cardDto.getLibelle(), LocalDateTime.parse(cardDto.getCreatedDate(), formatter), LocalDateTime.parse(cardDto.getDeadLine(), formatter), cardDto.getLieu(), cardDto.getUrl(), cardDto.getNote());
     }
 
