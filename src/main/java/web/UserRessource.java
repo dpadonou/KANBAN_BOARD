@@ -4,11 +4,16 @@ import dto.add.AddUserDto;
 import dto.batch.BatchUserDto;
 import dto.list.UserDto;
 import dto.mapper.UserMapper;
+import dto.relations.ManyToOneDto;
+import dto.relations.OneToOneDto;
+import entities.Card;
 import entities.User;
+import service.CardService;
 import service.UserService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,27 +21,28 @@ import java.util.stream.Collectors;
 @Produces({"application/json", "application/xml"})
 public class UserRessource {
 
-    UserService service = new UserService();
+    UserService userService = new UserService();
+    CardService cardService = new CardService();
     UserMapper mapper = new UserMapper();
 
     @GET
     @Path("/{userId}")
-    public UserDto findOne(@PathParam("userId") Long userId)  {
-        User user = service.findOne(userId);
+    public UserDto findOne(@PathParam("userId") Long userId) {
+        User user = userService.findOne(userId);
         return mapper.toDto(user);
     }
 
     @GET
-    public List<UserDto> findAll()  {
-        List<User> users = service.findAll();
+    public List<UserDto> findAll() {
+        List<User> users = userService.findAll();
         return users.stream().map(user -> mapper.toDto(user)).collect(Collectors.toList());
     }
 
     @POST
     @Consumes("application/json")
     public Response save(AddUserDto userDTO) {
-        service.save(mapper.toUser(userDTO));
-        
+        userService.save(mapper.toUser(userDTO));
+
         return Response.ok().entity("Le nouvel utilisateur a été ajouté avec succès.").build();
     }
 
@@ -44,30 +50,111 @@ public class UserRessource {
     @Path("/many")
     @Consumes("application/json")
     public Response save(BatchUserDto userList) {
-        userList.getUserList().forEach(addUserDto -> service.save(mapper.toUser(addUserDto)));
-        
+        userList.getUserList().forEach(addUserDto -> userService.save(mapper.toUser(addUserDto)));
+
         return Response.ok().entity(userList.getUserList().size() + " nouveaux utilisateurs ont été ajoutés avec succès.").build();
     }
 
     @PUT
     @Path("/{userId}")
     @Consumes("application/json")
-    //TODO: Récupérer un id dans le path et les nouvelles valeurs dans le body
-    public UserDto update(@PathParam("userId") Long id, AddUserDto userDTO){
-        User old = service.findOne(id);
-        if (old != null){
+    public UserDto update(@PathParam("userId") Long id, AddUserDto userDTO) {
+        User old = userService.findOne(id);
+        if (old != null) {
             User newUser = mapper.toUser(userDTO);
             old.setFirstName(newUser.getFirstName());
             old.setLastName(newUser.getLastName());
-            service.update(old);
-        }else throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
+            userService.update(old);
+        } else throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
         return mapper.toDto(old);
+    }
+
+    @PUT
+    @Path("createCard")
+    @Consumes("application/json")
+    public UserDto createCard(OneToOneDto dto) {
+        User emitter = userService.findOne(dto.getMainId());
+        Card card = cardService.findOne(dto.getForeignId());
+
+        if (emitter != null && card != null) {
+            emitter.addOwned(card);
+            userService.update(emitter);
+            cardService.update(card);
+        } else if (emitter == null) {
+            throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
+        } else throw new AssertionError("Veuillez entrer un identifiant valide pour la tâche.");
+        return mapper.toDto(emitter);
+    }
+
+    @PUT
+    @Path("createCard/many")
+    @Consumes("application/json")
+    public UserDto createManyCard(ManyToOneDto dto) {
+        User emitter = userService.findOne(dto.getMainId());
+        List<Card> cards = new ArrayList<>();
+
+        for (Long id : dto.getForeignIds()) {
+            Card c = cardService.findOne(id);
+            if (c != null){
+                cards.add(c);
+            }else throw new AssertionError("Une erreur est survenu lors de la création de la Card d'identifiant : " + id +".");
+        }
+
+        if (emitter != null) {
+            for (Card card : cards) {
+                emitter.addOwned(card);
+                userService.update(emitter);
+                cardService.update(card);
+            }
+        }else throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
+
+        return mapper.toDto(emitter);
+    }
+
+    @PUT
+    @Path("addTask/many")
+    @Consumes("application/json")
+    public UserDto addManyTask(ManyToOneDto dto) {
+        User emitter = userService.findOne(dto.getMainId());
+        List<Card> cards = new ArrayList<>();
+
+        for (Long id : dto.getForeignIds()) {
+            Card c = cardService.findOne(id);
+            if (c != null){
+                cards.add(c);
+            }else throw new AssertionError("Une erreur est survenu lors de la création de la Card d'identifiant : " + id +".");
+        }
+
+        if (emitter != null) {
+            for (Card card : cards) {
+                emitter.addTache(card);
+                userService.update(emitter);
+                cardService.update(card);
+            }
+        }else throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
+
+        return mapper.toDto(emitter);
+    }
+
+    @PUT
+    @Path("addTask")
+    @Consumes("application/json")
+    public UserDto addTask(OneToOneDto dto) {
+        User emitter = userService.findOne(dto.getMainId());
+        Card card = cardService.findOne(dto.getForeignId());
+
+        if (emitter != null && card != null) {
+            emitter.addTache(card);
+            userService.update(emitter);
+            cardService.update(card);
+        } else throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
+        return mapper.toDto(emitter);
     }
 
     @DELETE
     @Path("/{userId}")
-    public Response deleteById(@PathParam("userId")Long userId){
-        service.deleteById(userId);
+    public Response deleteById(@PathParam("userId") Long userId) {
+        userService.deleteById(userId);
         return Response.ok().entity(" nouveaux utilisateurs ont été ajoutés avec succès.").build();
     }
 

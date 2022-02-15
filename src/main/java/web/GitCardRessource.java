@@ -51,7 +51,6 @@ public class GitCardRessource {
     @PUT
     @Path("/{gitCardId}")
     @Consumes("application/json")
-    //TODO: Récupérer un id dans le path et les nouvelles valeurs dans le body
     public GitCardDto update(@PathParam("gitCardId") Long id, AddGitCardDto gitCardDto) {
         GitCard old = service.findOne(id);
         if (old != null) {

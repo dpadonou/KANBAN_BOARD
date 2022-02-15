@@ -51,7 +51,6 @@ public class CardRessource {
     @PUT
     @Path("/{cardId}")
     @Consumes("application/json")
-    //TODO: Récupérer un id dans le path et les nouvelles valeurs dans le body
     public CardDto update(@PathParam("cardId") Long id, AddCardDto cardDto) {
         Card old = service.findOne(id);
         if (old != null) {

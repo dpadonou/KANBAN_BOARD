@@ -52,7 +52,6 @@ public class BoardRessource {
     @PUT
     @Path("/{boardId}")
     @Consumes("application/json")
-    //TODO: Récupérer un id dans le path et les nouvelles valeurs dans le body
     public BoardDto update(@PathParam("boardId") Long id, AddBoardDto boardDto) {
         Board old = service.findOne(id);
         if (old != null) {
