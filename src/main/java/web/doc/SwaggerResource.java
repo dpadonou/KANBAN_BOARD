@@ -1,13 +1,12 @@
 package web.doc;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.logging.Logger;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 
 @Path("/api")
 public class SwaggerResource {
@@ -28,7 +27,7 @@ public class SwaggerResource {
     public byte[] Get(@PathParam("path") String path) {
         System.err.println(path);
         try {
-            return Files.readAllBytes(FileSystems.getDefault().getPath("src/main/webapp/swagger/dist/"+path));
+            return Files.readAllBytes(FileSystems.getDefault().getPath("src/main/webapp/swagger/dist/" + path));
         } catch (IOException e) {
             return null;
         }

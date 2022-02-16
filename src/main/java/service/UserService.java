@@ -6,7 +6,7 @@ import entities.User;
 import java.util.List;
 
 public class UserService {
-    
+
     private final UserDao userDao = new UserDao();
 
     public UserService() {
@@ -28,11 +28,11 @@ public class UserService {
     public User update(User entity) {
         return userDao.update(entity);
     }
-    
+
     public void delete(User entity) {
         userDao.delete(entity);
     }
-    
+
     public void deleteById(Long entityId) {
         userDao.deleteById(entityId);
     }

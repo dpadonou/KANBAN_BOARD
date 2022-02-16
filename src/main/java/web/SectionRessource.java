@@ -3,13 +3,11 @@ package web;
 import dto.add.AddSectionDto;
 import dto.batch.BatchSectionDto;
 import dto.list.SectionDto;
-import dto.list.UserDto;
 import dto.mapper.SectionMapper;
 import dto.relations.ManyToOneDto;
 import dto.relations.OneToOneDto;
 import entities.Card;
 import entities.Section;
-import entities.User;
 import service.CardService;
 import service.SectionService;
 
@@ -44,7 +42,7 @@ public class SectionRessource {
     @Consumes("application/json")
     public Response save(AddSectionDto sectionDto) {
         sectionService.save(mapper.toSection(sectionDto));
-        
+
         return Response.ok().entity("Le nouvel utilisateur a été ajouté avec succès.").build();
     }
 
@@ -78,9 +76,9 @@ public class SectionRessource {
 
         for (Long id : dto.getForeignIds()) {
             Card c = cardService.findOne(id);
-            if (c != null){
+            if (c != null) {
                 cards.add(c);
-            }else throw new AssertionError("Aucune tâche portant l'identifiant : " + id +" n'a été retrouvée.");
+            } else throw new AssertionError("Aucune tâche portant l'identifiant : " + id + " n'a été retrouvée.");
         }
 
         if (emitter != null) {
@@ -89,7 +87,7 @@ public class SectionRessource {
                 sectionService.update(emitter);
                 cardService.update(card);
             }
-        }else throw new AssertionError("Aucune section portant ce identifiant n'a été retrouvé.");
+        } else throw new AssertionError("Aucune section portant ce identifiant n'a été retrouvé.");
 
         return mapper.toDto(emitter);
     }
@@ -105,7 +103,7 @@ public class SectionRessource {
             emitter.addCarte(card);
             sectionService.update(emitter);
             cardService.update(card);
-        }  else if (emitter == null) {
+        } else if (emitter == null) {
             throw new AssertionError("Aucune section portant ce identifiant n'a été retrouvé.");
         } else throw new AssertionError("Veuillez entrer un identifiant valide pour la tâche.");
         return mapper.toDto(emitter);

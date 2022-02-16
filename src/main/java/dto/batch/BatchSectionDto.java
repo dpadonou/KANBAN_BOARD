@@ -1,7 +1,6 @@
 package dto.batch;
 
 import dto.add.AddSectionDto;
-import dto.add.AddUserDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -24,7 +24,7 @@ public class JpaTest {
         tx.commit();
 
         getDatabaseContent(manager);
-        
+
         manager.close();
         EntityManagerHelper.closeEntityManagerFactory();
     }
@@ -39,7 +39,7 @@ public class JpaTest {
         getSomeCard(manager);
     }
 
-    private static void fillDatabase(EntityManager manager){
+    private static void fillDatabase(EntityManager manager) {
         Card c1 = createCarte("Ajouter un bouton submit", LocalDateTime.now().minusHours(12), LocalDateTime.now().plusDays(2), "Istic Beaulieu", "http://localhost:5432/carte/0", "Description", manager);
         Card c2 = createCarte("Corriger le code couleur de la fenêtre de lancement", LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(1).plusHours(3), "Istic Beaulieu", "http://localhost:5432/carte/1", "Description", manager);
 
@@ -108,25 +108,25 @@ public class JpaTest {
         return user;
     }
 
-    private static Board createBoard(String title, EntityManager manager){
+    private static Board createBoard(String title, EntityManager manager) {
         Board board = new Board(title);
         manager.persist(board);
         return board;
     }
 
-    private static Section createSection(String name, EntityManager manager){
+    private static Section createSection(String name, EntityManager manager) {
         Section section = new Section(name);
         manager.persist(section);
         return section;
     }
 
-    private static Card createCarte(String libelle, LocalDateTime createdDate, LocalDateTime deadLine, String lieu, String url, String note, EntityManager manager){
+    private static Card createCarte(String libelle, LocalDateTime createdDate, LocalDateTime deadLine, String lieu, String url, String note, EntityManager manager) {
         Card card = new Card(libelle, createdDate, deadLine, lieu, url, note);
         manager.persist(card);
         return card;
     }
 
-    private static GitCard createGitCarte(String libelle, LocalDateTime createdDate, LocalDateTime deadLine, String lieu, String url, String note, String urlIssue, String gitHash, EntityManager manager){
+    private static GitCard createGitCarte(String libelle, LocalDateTime createdDate, LocalDateTime deadLine, String lieu, String url, String note, String urlIssue, String gitHash, EntityManager manager) {
         GitCard card = new GitCard(libelle, createdDate, deadLine, lieu, url, note, urlIssue, gitHash);
         manager.persist(card);
         return card;
@@ -160,7 +160,7 @@ public class JpaTest {
 
         TableList tl = new TableList(3, "ID", "NAME", "TABLEAU").withUnicode(true);
         for (Section section : result) {
-            for (Board board : section.getBoards()){
+            for (Board board : section.getBoards()) {
                 tl.addRow(String.valueOf(section.getId()), section.getName(), board.getTitle());
             }
         }
@@ -173,7 +173,7 @@ public class JpaTest {
 
         TableList tl = new TableList(11, "ID", "LIBELLE", "CREATED_DATE", "DEAD_LINE", "ALLOCATED_TIME", "LIEU", "URL", "NOTE", "PERSONNE_EN_CHARGE", "CREATOR", "SECTION_COURANTE").withUnicode(true);
         for (Card card : result) {
-            for (User user : card.getInCharge()){
+            for (User user : card.getInCharge()) {
                 tl.addRow(String.valueOf(card.getId()), card.getLibelle(), card.getCreatedDate().toString(), card.getDeadLine().toString(), String.valueOf(card.getAllocatedTime()), card.getLieu(), card.getUrl(), card.getNote(), (user.getFirstName() + " " + user.getLastName()), (card.getCreator().getFirstName() + " " + card.getCreator().getLastName()), card.getSection().getName());
             }
         }
@@ -183,10 +183,10 @@ public class JpaTest {
     private static void listGitCarte(EntityManager manager) {
         List<GitCard> result = manager.createQuery("Select gc From GitCard gc", GitCard.class).getResultList();
         System.out.println("Nombre de cartes:" + result.size());
-        
+
         TableList tl = new TableList(13, "ID", "LIBELLE", "CREATED_DATE", "DEAD_LINE", "ALLOCATED_TIME", "LIEU", "URL", "NOTE", "URL_ISSUE", "GIT_HASH", "PERSONNE_EN_CHARGE", "CREATOR", "SECTION_COURANTE").withUnicode(true);
         for (GitCard card : result) {
-            for (User user : card.getInCharge()){
+            for (User user : card.getInCharge()) {
                 tl.addRow(String.valueOf(card.getId()), card.getLibelle(), card.getCreatedDate().toString(), card.getDeadLine().toString(), String.valueOf(card.getAllocatedTime()), card.getLieu(), card.getUrl(), card.getNote(), card.getUrlIssue(), card.getGitHash(), (user.getFirstName() + " " + user.getLastName()), (card.getCreator().getFirstName() + " " + card.getCreator().getLastName()), card.getSection().getName());
             }
         }
@@ -199,7 +199,7 @@ public class JpaTest {
 
         TableList tl = new TableList(11, "ID", "LIBELLE", "CREATED_DATE", "DEAD_LINE", "ALLOCATED_TIME", "LIEU", "URL", "NOTE", "PERSONNE_EN_CHARGE", "CREATOR", "SECTION_COURANTE").withUnicode(true);
         for (GitCard card : result) {
-            for (User user : card.getInCharge()){
+            for (User user : card.getInCharge()) {
                 tl.addRow(String.valueOf(card.getId()), card.getLibelle(), card.getCreatedDate().toString(), card.getDeadLine().toString(), String.valueOf(card.getAllocatedTime()), card.getLieu(), card.getUrl(), card.getNote(), (user.getFirstName() + " " + user.getLastName()), (card.getCreator().getFirstName() + " " + card.getCreator().getLastName()), card.getSection().getName());
             }
         }

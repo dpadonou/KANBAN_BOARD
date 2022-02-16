@@ -6,11 +6,11 @@ import javax.persistence.Persistence;
 
 public class EntityManagerHelper {
 
-    private static final EntityManagerFactory emf; 
+    private static final EntityManagerFactory emf;
     private static final ThreadLocal<EntityManager> threadLocal;
 
     static {
-        emf = Persistence.createEntityManagerFactory("postgres");
+        emf = Persistence.createEntityManagerFactory("postgres-pro");
         threadLocal = new ThreadLocal<EntityManager>();
     }
 
@@ -46,5 +46,5 @@ public class EntityManagerHelper {
 
     public static void commit() {
         getEntityManager().getTransaction().commit();
-    } 
+    }
 }

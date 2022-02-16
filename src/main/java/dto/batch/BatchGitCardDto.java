@@ -1,7 +1,6 @@
 package dto.batch;
 
 import dto.add.AddGitCardDto;
-import dto.add.AddUserDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +12,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BatchGitCardDto{
+public class BatchGitCardDto {
     List<AddGitCardDto> gitCardList;
 }

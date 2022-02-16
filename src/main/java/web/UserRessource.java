@@ -95,9 +95,10 @@ public class UserRessource {
 
         for (Long id : dto.getForeignIds()) {
             Card c = cardService.findOne(id);
-            if (c != null){
+            if (c != null) {
                 cards.add(c);
-            }else throw new AssertionError("Une erreur est survenu lors de la création de la Card d'identifiant : " + id +".");
+            } else
+                throw new AssertionError("Une erreur est survenu lors de la création de la Card d'identifiant : " + id + ".");
         }
 
         if (emitter != null) {
@@ -106,7 +107,7 @@ public class UserRessource {
                 userService.update(emitter);
                 cardService.update(card);
             }
-        }else throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
+        } else throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
 
         return mapper.toDto(emitter);
     }
@@ -120,9 +121,10 @@ public class UserRessource {
 
         for (Long id : dto.getForeignIds()) {
             Card c = cardService.findOne(id);
-            if (c != null){
+            if (c != null) {
                 cards.add(c);
-            }else throw new AssertionError("Une erreur est survenu lors de la création de la Card d'identifiant : " + id +".");
+            } else
+                throw new AssertionError("Une erreur est survenu lors de la création de la Card d'identifiant : " + id + ".");
         }
 
         if (emitter != null) {
@@ -131,7 +133,7 @@ public class UserRessource {
                 userService.update(emitter);
                 cardService.update(card);
             }
-        }else throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
+        } else throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
 
         return mapper.toDto(emitter);
     }

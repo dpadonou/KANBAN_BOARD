@@ -49,7 +49,7 @@ public class User implements Serializable {
         card.getInCharge().add(this);
     }
 
-    public String concatName(){
+    public String concatName() {
         return firstName + " " + lastName;
     }
 }

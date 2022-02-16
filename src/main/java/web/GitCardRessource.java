@@ -36,7 +36,7 @@ public class GitCardRessource {
     @Consumes("application/json")
     public Response save(AddGitCardDto gitCardDto) {
         service.save(mapper.toGitCard(gitCardDto));
-        
+
         return Response.ok().entity("Le nouvel utilisateur a été ajouté avec succès.").build();
     }
 
