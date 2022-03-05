@@ -86,14 +86,12 @@
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="postgres-pro" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="postgres-prod" transaction-type="RESOURCE_LOCAL">
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/> <!-- DB Driver -->
-            <property name="javax.persistence.jdbc.url"
-                      value="jdbc:postgresql://ec2-54-194-147-61.eu-west-1.compute.amazonaws.com/d7gsu7d4idh1gl"/> <!-- BD Mane -->
-            <property name="javax.persistence.jdbc.user" value="chmburoaflmfoe"/> <!-- DB User -->
-            <property name="javax.persistence.jdbc.password"
-                      value="5c1b560c7a0170d73e247cbf99a5b537fc7a10d1df97f1b6bd742eab48d031cf"/> <!-- DB Password -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-54-195-76-73.eu-west-1.compute.amazonaws.com/d2als0588gukf3"/> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.user" value="jxfmwaorrlaucl"/> <!-- DB User -->
+            <property name="javax.persistence.jdbc.password" value="fa7fdc9a9c263ae70ec2e4490cbb20dbccdc3740510b906e14057d8ba825a6ca"/> <!-- DB Password -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL10Dialect"/> <!-- DB Dialect -->
             <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- create / create-drop / update -->
             <property name="hibernate.show_sql" value="false"/> <!-- Show SQL in console -->
