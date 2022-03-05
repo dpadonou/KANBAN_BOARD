@@ -21,6 +21,13 @@ public class BoardDao extends AbstractJpaDao<Long, Board> {
         return super.findOne(id);
     }
 
+    public List<Board> findAllByUserId(Long userId) {
+        String query = "SELECT b FROM Board AS b " +
+                "JOIN b.sections AS s JOIN s.fiches as c JOIN c.inCharge as u " +
+                "WHERE u.id = " + userId;
+        return entityManager.createQuery(query, Board.class).getResultList();
+    }
+
     @Override
     public List<Board> findAll() {
         return super.findAll();

@@ -26,6 +26,11 @@ public class UserDao extends AbstractJpaDao<Long, User> {
         return super.findAll();
     }
 
+    public List<User> findAllByCardId(Long cardId) {
+        String query = "SELECT u FROM User AS u JOIN u.taches AS c WHERE c.id = " + cardId;
+        return entityManager.createQuery(query, User.class).getResultList();
+    }
+
     @Override
     public void save(User entity) {
         super.save(entity);

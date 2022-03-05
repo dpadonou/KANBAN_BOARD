@@ -33,6 +33,13 @@ public class BoardRessource {
     }
 
     @GET
+    @Path("/works-on/{userId}")
+    public List<BoardDto> findAllByCardId(@PathParam("userId") Long userId) {
+        List<Board> boards = boardService.findAllByUserId(userId);
+        return boards.stream().map(board -> mapper.toDto(board)).collect(Collectors.toList());
+    }
+
+    @GET
     public List<BoardDto> findAll() {
         List<Board> boards = boardService.findAll();
         return boards.stream().map(board -> mapper.toDto(board)).collect(Collectors.toList());
@@ -42,7 +49,6 @@ public class BoardRessource {
     @Consumes("application/json")
     public Response save(AddBoardDto boardDto) {
         boardService.save(mapper.toBoard(boardDto));
-
         return Response.ok().entity("Le nouvel utilisateur a été ajouté avec succès.").build();
     }
 
@@ -51,7 +57,6 @@ public class BoardRessource {
     @Consumes("application/json")
     public Response save(BatchBoardDto boardList) {
         boardList.getBoardList().forEach(addBoardDto -> boardService.save(mapper.toBoard(addBoardDto)));
-
         return Response.ok().entity(boardList.getBoardList().size() + " nouveaux utilisateurs ont été ajoutés avec succès.").build();
     }
 

@@ -29,7 +29,7 @@ public class User implements Serializable {
     @ManyToMany(mappedBy = "inCharge")
     private List<Card> taches;
 
-    @OneToMany(mappedBy = "creator")
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.REMOVE)
     private List<Card> owned;
 
     public User(String lastName, String firstName) {

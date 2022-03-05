@@ -14,7 +14,12 @@ public class UserService {
     }
 
     public User findOne(Long id) {
+        User u = userDao.findOne(id);
         return userDao.findOne(id);
+    }
+
+    public List<User> findAllByCardId(Long CardId) {
+        return userDao.findAllByCardId(CardId);
     }
 
     public List<User> findAll() {

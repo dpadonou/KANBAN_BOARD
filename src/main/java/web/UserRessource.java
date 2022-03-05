@@ -33,6 +33,13 @@ public class UserRessource {
     }
 
     @GET
+    @Path("/works-on/{cardId}")
+    public List<UserDto> findAllByCardId(@PathParam("cardId") Long cardId) {
+        List<User> users = userService.findAllByCardId(cardId);
+        return users.stream().map(user -> mapper.toDto(user)).collect(Collectors.toList());
+    }
+
+    @GET
     public List<UserDto> findAll() {
         List<User> users = userService.findAll();
         return users.stream().map(user -> mapper.toDto(user)).collect(Collectors.toList());
@@ -42,7 +49,6 @@ public class UserRessource {
     @Consumes("application/json")
     public Response save(AddUserDto userDTO) {
         userService.save(mapper.toUser(userDTO));
-
         return Response.ok().entity("Le nouvel utilisateur a été ajouté avec succès.").build();
     }
 
@@ -51,7 +57,6 @@ public class UserRessource {
     @Consumes("application/json")
     public Response save(BatchUserDto userList) {
         userList.getUserList().forEach(addUserDto -> userService.save(mapper.toUser(addUserDto)));
-
         return Response.ok().entity(userList.getUserList().size() + " nouveaux utilisateurs ont été ajoutés avec succès.").build();
     }
 
@@ -149,7 +154,9 @@ public class UserRessource {
             emitter.addTache(card);
             userService.update(emitter);
             cardService.update(card);
-        } else throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
+        } else if (emitter == null) {
+            throw new AssertionError("Aucun utilisateur portant ce identifiant n'a été retrouvé.");
+        } else throw new AssertionError("Veuillez entrer un identifiant valide pour la tâche.");
         return mapper.toDto(emitter);
     }
 

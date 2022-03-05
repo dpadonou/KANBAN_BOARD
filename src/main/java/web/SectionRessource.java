@@ -8,6 +8,11 @@ import dto.relations.ManyToOneDto;
 import dto.relations.OneToOneDto;
 import entities.Card;
 import entities.Section;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import service.CardService;
 import service.SectionService;
 
@@ -27,7 +32,16 @@ public class SectionRessource {
 
     @GET
     @Path("/{sectionId}")
-    public SectionDto findOne(@PathParam("sectionId") Long sectionId) {
+    @Operation(
+            summary = "Retourne la section ayant un identifiant donné.",
+            responses = {
+                    @ApiResponse(
+                            description = "Une section",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = SectionDto.class))
+                    )
+            }
+    )
+    public SectionDto findOne(@Parameter(description = "Identifiant de la section à retournée.", required = true) @PathParam("sectionId") Long sectionId) {
         Section section = sectionService.findOne(sectionId);
         return mapper.toDto(section);
     }

@@ -63,4 +63,9 @@ public class Card implements Serializable {
         this.url = url;
         this.note = note;
     }
+
+    public void assignToSomeOne(User user) {
+        inCharge.add(user);
+        user.getTaches().add(this);
+    }
 }

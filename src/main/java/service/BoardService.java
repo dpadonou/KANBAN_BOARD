@@ -17,6 +17,10 @@ public class BoardService {
         return boardDao.findOne(id);
     }
 
+    public List<Board> findAllByUserId(Long userId) {
+        return boardDao.findAllByUserId(userId);
+    }
+
     public List<Board> findAll() {
         return boardDao.findAll();
     }
