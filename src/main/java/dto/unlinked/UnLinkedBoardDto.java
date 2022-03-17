@@ -1,19 +1,15 @@
-package dto.list;
+package dto.unlinked;
 
-import dto.unlinked.UnLinkedSectionDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardDto {
+public class UnLinkedBoardDto {
     private long id;
     private String title;
-    private List<UnLinkedSectionDto> sections;
 }

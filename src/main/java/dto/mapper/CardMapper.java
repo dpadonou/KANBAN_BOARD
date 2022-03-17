@@ -2,8 +2,11 @@ package dto.mapper;
 
 import dto.add.AddCardDto;
 import dto.list.CardDto;
+import dto.mapper.unlinked.UnLinkedSectionMapper;
+import dto.mapper.unlinked.UnLinkedUserMapper;
+import dto.unlinked.UnLinkedSectionDto;
+import dto.unlinked.UnLinkedUserDto;
 import entities.Card;
-import entities.User;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +16,11 @@ import java.util.stream.Collectors;
 public class CardMapper {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
+    UnLinkedUserMapper userMapper = new UnLinkedUserMapper();
+    UnLinkedSectionMapper sectionMapper = new UnLinkedSectionMapper();
+
     public CardDto toDto(Card card) {
+        long id = card.getId();
         String libelle = card.getLibelle();
         String createdDate = formatter.format(card.getCreatedDate());
         String deadLine = formatter.format(card.getDeadLine());
@@ -21,15 +28,15 @@ public class CardMapper {
         String lieu = card.getLieu();
         String url = card.getUrl();
         String note = card.getNote();
-        List<String> personnesEnCharge = card
+        List<UnLinkedUserDto> personnesEnCharge = card
                 .getInCharge()
                 .stream()
-                .map(User::concatName)
+                .map(user -> userMapper.toUnLinkedDto(user))
                 .collect(Collectors.toList());
-        String creator = card.getCreator().concatName();
-        String section = card.getSection().getName();
+        UnLinkedUserDto creator = userMapper.toUnLinkedDto(card.getCreator());
+        UnLinkedSectionDto section = sectionMapper.toUnLinkedDto(card.getSection());
 
-        return new CardDto(libelle, createdDate, deadLine, allocatedTime, lieu, url, note, personnesEnCharge, creator, section);
+        return new CardDto(id, libelle, createdDate, deadLine, allocatedTime, lieu, url, note, personnesEnCharge, creator, section);
     }
 
     public Card toCard(AddCardDto cardDto) {

@@ -1,21 +1,16 @@
-package dto.list;
+package dto.unlinked;
 
-import dto.unlinked.UnLinkedCardDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+@AllArgsConstructor
+public class UnLinkedUserDto {
     private long id;
     private String firstName;
     private String lastName;
-    private List<UnLinkedCardDto> tachesAssigner;
-    private List<UnLinkedCardDto> tachesCreer;
 }

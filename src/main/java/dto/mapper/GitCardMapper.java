@@ -17,7 +17,7 @@ public class GitCardMapper extends CardMapper {
         String urlIssue = card.getUrlIssue();
         String gitHash = card.getGitHash();
 
-        return new GitCardDto(c.getLibelle(), c.getCreatedDate(), c.getDeadLine(), c.getAllocatedTime(), c.getLieu(), c.getUrl(), c.getNote(), c.getPersonnesEnCharge(), c.getCreator(), c.getSection(), urlIssue, gitHash);
+        return new GitCardDto(c.getId(), c.getLibelle(), c.getCreatedDate(), c.getDeadLine(), c.getAllocatedTime(), c.getLieu(), c.getUrl(), c.getNote(), c.getPersonnesEnCharge(), c.getCreator(), c.getSection(), urlIssue, gitHash);
     }
 
     public GitCard toGitCard(AddGitCardDto cardDto) {
