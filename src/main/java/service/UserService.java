@@ -18,6 +18,10 @@ public class UserService {
         return userDao.findOne(id);
     }
 
+    public User loginUser(String email,String password){
+        return userDao.loginUser(email,password);
+    }
+
     public List<User> findAllByCardId(Long CardId) {
         return userDao.findAllByCardId(CardId);
     }

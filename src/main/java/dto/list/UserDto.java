@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
+    //private Long id;
     private String firstName;
     private String lastName;
     private List<String> tachesAssigner;

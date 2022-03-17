@@ -30,7 +30,11 @@ public class UserDao extends AbstractJpaDao<Long, User> {
         String query = "SELECT u FROM User AS u JOIN u.taches AS c WHERE c.id = " + cardId;
         return entityManager.createQuery(query, User.class).getResultList();
     }
+    public User loginUser(String email,String password){
+        String query = "select u from User u where u.email = '" +email+"' and u.password='" +password+"'";
+        return  entityManager.createQuery(query,User.class).getResultStream().findFirst().orElse(new User(0,"","","",""));
 
+    }
     @Override
     public void save(User entity) {
         super.save(entity);

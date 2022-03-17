@@ -1,12 +1,15 @@
 package web;
 
 import dto.add.AddUserDto;
+import dto.add.LoginUserDto;
 import dto.batch.BatchUserDto;
 import dto.list.UserDto;
+import dto.list.UserSessionDto;
 import dto.mapper.UserMapper;
 import dto.relations.ManyToOneDto;
 import dto.relations.OneToOneDto;
 import entities.Card;
+import entities.FeedBack;
 import entities.User;
 import service.CardService;
 import service.UserService;
@@ -32,6 +35,15 @@ public class UserRessource {
         return mapper.toDto(user);
     }
 
+    @POST
+    @Path("/login")
+    @Consumes("application/json")
+    public UserDto loginUser(LoginUserDto userDto){
+        User user = userService.loginUser(userDto.getEmail(),userDto.getPassword());
+        return mapper.toDto(user);
+
+    }
+
     @GET
     @Path("/works-on/{cardId}")
     public List<UserDto> findAllByCardId(@PathParam("cardId") Long cardId) {
@@ -47,9 +59,10 @@ public class UserRessource {
 
     @POST
     @Consumes("application/json")
-    public Response save(AddUserDto userDTO) {
+    public FeedBack save(AddUserDto userDTO) {
         userService.save(mapper.toUser(userDTO));
-        return Response.ok().entity("Le nouvel utilisateur a été ajouté avec succès.").build();
+        //return Response.ok().entity("Le nouvel utilisateur a été ajouté avec succès.").build();
+        return new FeedBack("Le nouvel utilisateur a été ajouté avec succès.");
     }
 
     @POST
@@ -80,7 +93,6 @@ public class UserRessource {
     public UserDto createCard(OneToOneDto dto) {
         User emitter = userService.findOne(dto.getMainId());
         Card card = cardService.findOne(dto.getForeignId());
-
         if (emitter != null && card != null) {
             emitter.addOwned(card);
             userService.update(emitter);
