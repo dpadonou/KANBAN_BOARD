@@ -2,7 +2,8 @@ package dto.mapper;
 
 import dto.add.AddUserDto;
 import dto.list.UserDto;
-import entities.Card;
+import dto.mapper.unlinked.UnLinkedCardMapper;
+import dto.unlinked.UnLinkedCardDto;
 import entities.User;
 
 import java.util.List;
@@ -10,21 +11,23 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 public class UserMapper {
+    UnLinkedCardMapper cardMapper = new UnLinkedCardMapper();
 
     public UserDto toDto(User user) {
+        long id = user.getId();
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
-        List<String> tachesAssigner = user
+        List<UnLinkedCardDto> tachesAssigner = user
                 .getTaches()
                 .stream()
-                .map(Card::getLibelle)
+                .map(card -> cardMapper.toUnLinkedDto(card))
                 .collect(toList());
-        List<String> tachesCreer = user
+        List<UnLinkedCardDto> tachesCreer = user
                 .getOwned()
                 .stream()
-                .map(Card::getLibelle)
+                .map(card -> cardMapper.toUnLinkedDto(card))
                 .collect(toList());
-        return new UserDto(firstName, lastName, tachesAssigner, tachesCreer);
+        return new UserDto(id, firstName, lastName, tachesAssigner, tachesCreer);
     }
 
     public User toUser(AddUserDto userDTO) {

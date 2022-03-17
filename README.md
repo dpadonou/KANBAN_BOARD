@@ -1,10 +1,13 @@
 # Kanban Board Simulator 2.0
+
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/makes-people-smile.svg)](https://forthebadge.com)
 
-####_Backend d'un projet de simulation du fonctionnement d'un Kanban board._
+#### Backend d'un projet de simulation du fonctionnement d'un Kanban board.
 
 ### Pré-requis
-- Version du jdk : Ce projet a été testé avec la version **17 du JDK (Java JDK 17)**. Certains réglages mineurs pourraient s'avérés nécessaires pour la compatibilité avec des versions antérieures du JDK.
+
+- Version du jdk : Ce projet a été testé avec la version **17 du JDK (Java JDK 17)**. Certains réglages mineurs
+  pourraient s'avérés nécessaires pour la compatibilité avec des versions antérieures du JDK.
 
 
 - La **base de données** utilisée est **PostgreSQL** dans sa **version 14**.
@@ -15,14 +18,17 @@
 
 
 - Dans le projet, nous avons génnérer les getteurs et les setteurs avec **lombok**
-    - Pour l'intégration de **lombok dans Eclipse ou Intellij** veuillez vous référer au lien suivant : **[Setting up Lombok with Eclipse and Intellij](https://www.baeldung.com/lombok-ide)**
+    - Pour l'intégration de **lombok dans Eclipse ou Intellij** veuillez vous référer au lien
+      suivant : **[Setting up Lombok with Eclipse and Intellij](https://www.baeldung.com/lombok-ide)**
 
 ### Installation
+
 Pour peupler la base de données avec des données de test, rien de plus simple :)
 
 - Remplir la base de donnée avec des données de test :
 
-  Un fichier : **_JpaTest_, permettant de créer et d'ajouter quelques données à la base,** a été fourni dans le package **_db_** du projet.
+  Un fichier : **_JpaTest_, permettant de créer et d'ajouter quelques données à la base,** a été fourni dans le
+  package **_db_** du projet.
 
 ## Démarrage
 
@@ -30,12 +36,16 @@ Pour peupler la base de données avec des données de test, rien de plus simple 
   Exécuter le fichier **RestServer** se trouvant à la racine du package _**java**_ du projet.
 
 ## Versions
+
 **Dernière version stable :** Sur la branche **Master**
 
-##Test
-* Le projet peut être testé, en local, via **Swagger** (Cliquer **[ICI](http://localhost:8080/api#/)** après avoir lancé le server en local).
+## Test
 
-###Postman :
+* Le projet peut être testé, en local, via **Swagger** (Cliquer **[ICI](http://localhost:8080/api#/)** après avoir lancé
+  le server en local).
+
+### Postman :
+
     Ajout de plusieurs utilisateurs: (URL) http://localhost:8080/user/many
         
         JSON Format: 
@@ -77,10 +87,10 @@ Pour peupler la base de données avec des données de test, rien de plus simple 
 
         ... (Veuillez vous référer au swagger pour avoir le format Json des différent endpoints MERCI. :)
 
-
-    
 ## Auteurs
+
 Membres du binôme:
+
 * **PADONOU Dieu-Donné**
 * **DJEDJEMEL Arnauld**
 

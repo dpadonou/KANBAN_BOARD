@@ -1,5 +1,7 @@
 package dto.list;
 
+import dto.unlinked.UnLinkedBoardDto;
+import dto.unlinked.UnLinkedCardDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SectionDto {
+    private long id;
     private String name;
-    private List<String> board;
-    private List<String> card;
+    private List<UnLinkedBoardDto> board;
+    private List<UnLinkedCardDto> card;
 }
