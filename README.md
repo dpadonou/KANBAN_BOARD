@@ -1,7 +1,7 @@
 # Kanban Board Simulator 2.0
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/makes-people-smile.svg)](https://forthebadge.com)
 
-####_Backend d'un projet de simulation du fonctionnement d'un Kanban board._
+####Backend d'un projet de simulation du fonctionnement d'un Kanban board._
 
 ### Pré-requis
 - Version du jdk : Ce projet a été testé avec la version **17 du JDK (Java JDK 17)**. Certains réglages mineurs pourraient s'avérés nécessaires pour la compatibilité avec des versions antérieures du JDK.
