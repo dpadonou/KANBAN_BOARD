@@ -32,10 +32,10 @@ Pour peupler la base de données avec des données de test, rien de plus simple 
 ## Versions
 **Dernière version stable :** Sur la branche **Master**
 
-##Test
+## Test
 * Le projet peut être testé, en local, via **Swagger** (Cliquer **[ICI](http://localhost:8080/api#/)** après avoir lancé le server en local).
 
-###Postman :
+### Postman :
     Ajout de plusieurs utilisateurs: (URL) http://localhost:8080/user/many
         
         JSON Format: 
